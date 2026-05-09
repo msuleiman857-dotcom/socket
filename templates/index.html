@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Socket Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #display-box { font-size: 3rem; font-weight: bold; color: #ff4757; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Render Socket Testing 🔌</h1>
+    <div id="display-box">Waiting for server...</div>
+
+    <script>
+        // Connects automatically to the domain hosting this page
+        const socket = io();
+
+        socket.on('connect', function() {
+            document.getElementById('display-box').innerText = "Connected! Waiting for item...";
+        });
+
+        socket.on('new_random_item', function(data) {
+            document.getElementById('display-box').innerText = data.item;
+        });
+    </script>
+</body>
+</html>
